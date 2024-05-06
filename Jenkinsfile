@@ -7,10 +7,10 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    checkout([$class: 'GitSCM',
-                              branches: [[name: '*/main']],
-                              extensions: [[$class: 'CloneOption', filter: params.GIT_FILTER]],
-                              userRemoteConfigs: [[url: 'https://github.com/TVDAnilov/MyBigApp.git']]])
+                    checkout([$class: 'GitSCM', 
+                            branches: [[name: 'main']], 
+                            userRemoteConfigs: [[url: 'https://github.com/TVDAnilov/MyBigApp.git']], 
+                            extensions: [[$class: 'PathRestriction', excludedRegions: '', includedRegions: 'MyBigApp/3/6/2']]])
                 }
             }
         }
