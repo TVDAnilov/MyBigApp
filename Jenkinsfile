@@ -5,8 +5,8 @@ pipeline {
             steps {
                 script {
                     checkout scmGit(branches: [[name: '*/main']], 
-                                    userRemoteConfigs: [[url: 'https://github.com/TVDAnilov/MyBigApp.git']],
-                                    subdir: 'MyBigApp/3/6')
+                                    extensions: [[$class: 'SparseCheckoutPaths', sparseCheckoutPaths: [[path: 'MyBigApp/3/6']]]],
+                                    userRemoteConfigs: [[url: 'https://github.com/TVDAnilov/MyBigApp.git']])
                 }
             }
         }
