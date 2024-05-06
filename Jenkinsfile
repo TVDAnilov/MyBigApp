@@ -4,10 +4,9 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    checkout([$class: 'GitSCM',
-                              branches: [[name: '*/main']],
-                              //extensions: [[]],
-                              userRemoteConfigs: [[url: 'https://github.com/TVDAnilov/MyBigApp.git']]])
+                    checkout scmGit(branches: [[name: '*/main']], 
+                                    extensions: [cloneOption(honorRefspec: true, noTags: false, reference: '\\MyBigApp\\3\\6', shallow: false)],
+                                    userRemoteConfigs: [[url: 'https://github.com/TVDAnilov/MyBigApp.git']])
                 }
             }
         }
