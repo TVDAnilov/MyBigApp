@@ -1,16 +1,17 @@
 pipeline {
     agent any
-
+    parameters {
+        string(name: 'GIT_FILTER', defaultValue: 'MyBigApp/3/6/2/*', description: 'Git LFS filters to apply during git clone (--filter)')
+    }
     stages {
-        stage('Загрузка изменений из Git') {
+        stage('Checkout') {
             steps {
-                git branch: 'master', url: 'https://github.com/TVDAnilov/Jenkins_tests.git'
-            }
-        }
-        stage('TestFolder') {
-            when { changeset "TestFolder/*"}
-            steps {
-                powershell 'Write-Host "TestFolder изменился!"'
+                script {
+                    checkout([$class: 'GitSCM',
+                              branches: [[name: '*/main']],
+                              extensions: [[$class: 'CloneOption', filter: params.GIT_FILTER]],
+                              userRemoteConfigs: [[url: 'https://github.com/TVDAnilov/MyBigApp.git']]])
+                }
             }
         }
         stage('Приветствие') {
