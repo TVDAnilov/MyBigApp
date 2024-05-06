@@ -1,19 +1,23 @@
 pipeline {
     agent any
-    //parameters {
-    //    string(name: 'GIT_FILTER', defaultValue: 'MyBigApp/3/6/2/*', description: 'Git LFS filters to apply during git clone (--filter)')
-    //}
+    parameters {
+        string(name: 'GIT_FILTER', defaultValue: 'MyBigApp/3/6/2/*', description: 'Git LFS filters to apply during git clone (--filter)')
+    }
+
     stages {
         stage('Checkout') {
             steps {
                 script {
-                    checkout([$class: 'GitSCM', 
-                            branches: [[name: 'main']], 
-                            userRemoteConfigs: [[url: 'https://github.com/TVDAnilov/MyBigApp.git']], 
-                            extensions: [[$class: 'PathRestriction', excludedRegions: '', includedRegions: 'MyBigApp/3/6/2']]])
+                    def gitFilter = params.GIT_FILTER ?: ''
+                    checkout([$class: 'GitSCM',
+                              branches: [[name: '*/main']],
+                              doGenerateSubmoduleConfigurations: false,
+                              extensions: [[$class: 'PathRestriction', excludedRegions: '', includedRegions: gitFilter]],
+                              userRemoteConfigs: [[url: 'https://github.com/TVDAnilov/MyBigApp.git']]])
                 }
             }
         }
+
         stage('Приветствие') {
             steps {
                 powershell 'Write-Host "Привет, мир!"'
