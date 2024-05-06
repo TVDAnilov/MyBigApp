@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    parameters {
-        string(name: 'GIT_FILTER', defaultValue: 'MyBigApp/3/6/2/*', description: 'Git LFS filters to apply during git clone (--filter)')
-    }
+    //parameters {
+    //    string(name: 'GIT_FILTER', defaultValue: 'MyBigApp/3/6/2/*', description: 'Git LFS filters to apply during git clone (--filter)')
+    //}
     stages {
         stage('Checkout') {
             steps {
