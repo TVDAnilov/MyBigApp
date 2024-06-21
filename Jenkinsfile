@@ -22,7 +22,7 @@ pipeline {
         stage('Сборка') {
             steps {
                 powershell 'Write-Host "Выполняется сборка..."'
-                powershell ".\1.ps1"
+                powershell ".\\1.ps1"
                 // Добавьте команды для сборки вашего проекта
             }
         }
