@@ -1,32 +1,14 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout') {
+        stage('Copy Archive') {
             steps {
                 script {
-                    checkout scmGit(branches: [[name: '*/main']], 
-                                    extensions: [[$class: 'SparseCheckoutPaths', sparseCheckoutPaths: [[path: '3/6']]]],
-                                    userRemoteConfigs: [[url: 'https://github.com/TVDAnilov/MyBigApp.git']])
+                    step ([$class: 'Copy_Artifact',
+                        projectName: 'MyBiiigApp',
+                        filter: "*",
+                        target: 'Infra']);
                 }
-            }
-        }
-        stage('Приветствие') {
-            steps {
-                powershell 'Write-Host "Привет, мир!"'
-            }
-        }
-
-        stage('Сборка') {
-            steps {
-                powershell 'Write-Host "Выполняется сборка..."'
-                // Добавьте команды для сборки вашего проекта
-            }
-        }
-
-        stage('Тесты') {
-            steps {
-                powershell 'Write-Host "Выполняются тесты..."'
-                // Добавьте команды для запуска тестов
             }
         }
 
