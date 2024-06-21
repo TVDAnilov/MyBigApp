@@ -1,14 +1,35 @@
 pipeline {
     agent any
+
     stages {
-        stage('Copy Archive') {
+        stage('Загрузка изменений из Git') {
             steps {
-                script {
-                    step ([$class: 'Copy_Artifact',
-                        projectName: 'MyBiiigApp',
-                        filter: "*",
-                        target: 'Infra']);
-                }
+                git branch: 'master', url: 'https://github.com/TVDAnilov/Jenkins_tests.git'
+            }
+        }
+        stage('TestFolder') {
+            when { changeset "TestFolder/*"}
+            steps {
+                powershell 'Write-Host "TestFolder изменился!"'
+            }
+        }
+        stage('Приветствие') {
+            steps {
+                powershell 'Write-Host "Привет, мир!"'
+            }
+        }
+
+        stage('Сборка') {
+            steps {
+                powershell 'Write-Host "Выполняется сборка..."'
+                // Добавьте команды для сборки вашего проекта
+            }
+        }
+
+        stage('Тесты') {
+            steps {
+                powershell 'Write-Host "Выполняются тесты..."'
+                // Добавьте команды для запуска тестов
             }
         }
 
