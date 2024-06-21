@@ -11,9 +11,7 @@ pipeline {
                 copyArtifacts(
                     projectName: "MyBiiigApp",
                     selector: buildParameter('Copy_Artifact'),
-                    target: 'deploy/CopyArt',
-
-
+                    target: 'deploy/CopyArt'
                 )
             }
         }
