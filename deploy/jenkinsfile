@@ -2,7 +2,7 @@ pipeline {
     agent any
     parameters{
         run(name: "Source_build", projectName: "MyBiiigApp", description: "descript")
-        build name: "Copy_Artifact", description: "descript", defaultselector: specific('Source_build_NUMBER')
+        buildSelector name: "Copy_Artifact", description: "descript", defaultselector: specific('Source_build_NUMBER')
 
     }
     stages {
