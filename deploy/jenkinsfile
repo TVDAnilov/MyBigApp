@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Example') {
             when {
-                environment name: 'Choice_param', value: 'Test'
+                environment name: 'Choice_param', value: 'Test_to_->_testServer'
             }
             input {
                 message "Should we continue?"
