@@ -12,6 +12,9 @@ pipeline {
             }
         }
         stage('Example') {
+            when{
+                environment name: 'Choice_param', value: 'Test'
+            }
             input {
                 message "Should we continue?"
                 ok "Yes, we should."
