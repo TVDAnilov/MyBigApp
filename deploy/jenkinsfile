@@ -14,10 +14,11 @@ pipeline {
         stage('Example') {
             steps {
                 script{
-                    if(${env:Choice_param} == "Test_to_->_testServer")
-                    input 
-                        message "Should we continue?"
-                        ok "Yes, we should."
+                    if(${env:Choice_param} == "Test_to_->_testServer"){
+                        input 
+                            message "Should we continue?"
+                            ok "Yes, we should."
+                    }    
                 }
             }
         }
