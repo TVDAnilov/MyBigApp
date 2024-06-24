@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Choice') {
             steps {
-                powershell "Write-Host ${env:Choice_param}"
+                powershell ".\\deploy\\1.ps1 -string1 ${env:Choice_param}"
             }
         }
         stage('Copy Archive') {
