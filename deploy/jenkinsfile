@@ -3,7 +3,7 @@ pipeline {
     parameters{
         run(name: "Source_build", projectName: "MyBiiigApp", description: "descript")
         buildSelector name: "Copy_Artifact", description: "descript", defaultSelector: specific('Source_build_NUMBER')
-        choice(name: 'Choice_param', choices: ['Test', 'Deploy'], description: '')
+        choice(name: 'Choice_param', choices: ['Test to -> testServer', 'Deploy'], description: '')
     }
     stages {
         stage('Choice') {
@@ -11,7 +11,6 @@ pipeline {
                 powershell ".\\deploy\\1.ps1 -string1 ${env:Choice_param}"
             }
         }
-     stages {
         stage('Example') {
             when {
                 environment name: 'Choice_param', value: 'Test'
@@ -28,7 +27,6 @@ pipeline {
                 echo "Hello, ${PERSON}, nice to meet you."
             }
         }
-    }
         stage('Copy Archive') {
             steps {
                 copyArtifacts(
