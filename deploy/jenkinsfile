@@ -3,7 +3,7 @@ pipeline {
     parameters{
         run(name: "Source_build", projectName: "MyBiiigApp", description: "descript")
         buildSelector name: "Copy_Artifact", description: "descript", defaultSelector: specific('Source_build_NUMBER')
-        parameters { choice(name: 'Choice_param', choices: ['Test', 'Deploy'], description: '') }
+        choice(name: 'Choice_param', choices: ['Test', 'Deploy'], description: '')
 
     }
     stages {
